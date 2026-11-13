@@ -39,10 +39,17 @@ class Settings(BaseSettings):
     SUPABASE_STORAGE_PUBLIC_BUCKET: str = "public-media"
     SUPABASE_STORAGE_PRIVATE_BUCKET: str = "private-verification"
 
-    # Twilio WhatsApp Business API
+    # Twilio WhatsApp Business API (Optional / Legacy)
     TWILIO_ACCOUNT_SID: str = "ACmockaccountsid00000000000000000"
     TWILIO_AUTH_TOKEN: str = "mock_twilio_auth_token"
     TWILIO_WHATSAPP_FROM: str = "whatsapp:+14155238886"
+
+    # Meta WhatsApp Cloud API (Graph API v22.0)
+    WHATSAPP_ACCESS_TOKEN: str = "mock_whatsapp_access_token"
+    WHATSAPP_PHONE_NUMBER_ID: str = "mock_whatsapp_phone_number_id"
+    WHATSAPP_APP_SECRET: str = "mock_whatsapp_app_secret"
+    WHATSAPP_VERIFY_TOKEN: str = "mock_whatsapp_verify_token"
+    WHATSAPP_GRAPH_VERSION: str = "v22.0"
 
     # Google Gemini AI Provider
     GEMINI_API_KEY: str = "mock_gemini_api_key"

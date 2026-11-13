@@ -1,2 +1,2 @@
-"""External integration clients for Supabase, Twilio, and Google Gemini."""
+"""External integration clients for Supabase, Meta WhatsApp Cloud API, and Google Gemini."""
 
