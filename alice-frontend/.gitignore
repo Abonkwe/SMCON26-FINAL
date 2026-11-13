@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+
+# Production build output
+dist/
+dist-ssr/
+
+# Local environment files (keep secrets and localhost URLs out of Git)
+.env
+.env.local
+.env.*.local
+
+# Logs & editor files
+logs/
+*.log
+npm-debug.log*
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+*.local
