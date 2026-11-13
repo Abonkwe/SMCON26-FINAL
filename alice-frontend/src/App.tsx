@@ -97,11 +97,12 @@ export const App: React.FC = () => {
       />
 
       {/* Main Content Viewport (Mobile-First 360px safe) */}
-      <main className="flex-1 w-full max-w-md mx-auto px-3.5 pt-3.5 pb-safe">
+      <main className={`flex-1 w-full mx-auto ${currentTab === 'home' && activeRole === 'CUSTOMER' ? 'pb-24 md:pb-0' : 'max-w-6xl px-4 md:px-8 pt-6 pb-safe'}`}>
         {renderActiveScreen()}
       </main>
 
       {/* Persistent Bottom Navigation with Central Circular + Action Button */}
+      <div className="md:hidden">
       <BottomNav
         currentTab={currentTab}
         onSelectTab={(tab) => {
@@ -110,6 +111,7 @@ export const App: React.FC = () => {
         }}
         onRequestService={() => handleOpenRequestService()}
       />
+      </div>
 
       {/* Global Modals & Drawers */}
       <AuthModal

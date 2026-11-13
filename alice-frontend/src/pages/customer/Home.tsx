@@ -3,20 +3,11 @@ import { useAuth } from '../../context/AuthContext';
 import { useLanguage } from '../../context/LanguageContext';
 import { ServiceCategory, ProviderSearchResult, Booking } from '../../types';
 import { api } from '../../lib/api';
-import { ServiceCard } from '../../components/service/ServiceCard';
-import { ProviderCard } from '../../components/service/ProviderCard';
 import { StatusPill } from '../../components/common/StatusPill';
 import { RoleSwitcher } from '../../components/layout/RoleSwitcher';
 import {
-  Search,
-  MapPin,
-  ShieldAlert,
-  ArrowRight,
-  Calendar,
-  CheckCircle2,
-  Clock,
-  Sparkles,
-  Zap,
+  Search, MapPin, ShieldAlert, ArrowRight, Calendar, CheckCircle2,
+  Clock, Sparkles, Zap, Wrench, Droplet, Flame, Shirt, Truck, Star,
 } from 'lucide-react';
 
 interface HomeProps {
@@ -26,15 +17,17 @@ interface HomeProps {
   onOpenReport: () => void;
 }
 
-export const Home: React.FC<HomeProps> = ({
-  onSelectCategory,
-  onSelectTab,
-  onRequestService,
-  onOpenReport,
-}) => {
-  const { user } = useAuth();
-  const { t } = useLanguage();
+const serviceImages = [
+  'https://images.unsplash.com/photo-1621905251918-48416bd8575a?auto=format&fit=crop&w=900&q=85',
+  'https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&w=900&q=85',
+  'https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=900&q=85',
+];
 
+const serviceIcons = [Wrench, Sparkles, Droplet, Flame, Shirt, Truck, Zap];
+
+export const Home: React.FC<HomeProps> = ({ onSelectCategory, onSelectTab, onRequestService, onOpenReport }) => {
+  const { user } = useAuth();
+  const { t, language } = useLanguage();
   const [categories, setCategories] = useState<ServiceCategory[]>([]);
   const [providers, setProviders] = useState<ProviderSearchResult[]>([]);
   const [activeBooking, setActiveBooking] = useState<Booking | null>(null);
@@ -49,200 +42,86 @@ export const Home: React.FC<HomeProps> = ({
     }).catch(console.error);
   }, []);
 
-  const handleSearchSubmit = (e: React.FormEvent) => {
+  const submitSearch = (e: React.FormEvent) => {
     e.preventDefault();
     onSelectTab('explore');
   };
-
-  // Safe personalized greeting without revealing sensitive data (Section 11.3)
-  const firstName = user?.display_name ? user.display_name.split(' ')[0] : 'there';
+  const firstName = user?.display_name ? user.display_name.split(' ')[0] : '';
+  const categoryName = (category: ServiceCategory) => language === 'fr' ? category.name_fr : category.name;
+  const categoryClick = (category: ServiceCategory) => {
+    if (category.slug === 'power-rental') onSelectTab('rentals');
+    else onSelectCategory(category.slug);
+  };
 
   return (
-    <div className="space-y-5 pb-8">
-      {/* Role Switcher Pill */}
-      <RoleSwitcher />
+    <div className="alice-home">
+      <div className="alice-role-control"><RoleSwitcher /></div>
 
-      {/* Greeting Banner */}
-      <div className="bg-pure-white rounded-3xl p-5 border border-cloud-gray shadow-card">
-        <div className="flex items-center justify-between mb-3">
-          <div>
-            <h2 className="font-extrabold text-midnight-navy text-xl tracking-tight">
-              {t('greeting')}, {firstName} 👋
-            </h2>
-            <p className="text-xs text-dark-slate/80 mt-0.5">
-              {t('greetingSub')}
-            </p>
-          </div>
-          <div className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-indigo-50 border border-royal-indigo/20 text-royal-indigo text-[11px] font-bold">
-            <MapPin className="w-3 h-3 text-royal-indigo shrink-0" />
-            <span>Buea, Cameroon</span>
-          </div>
+      <section className="alice-hero">
+        <div className="alice-hero-image" aria-hidden="true" />
+        <div className="alice-hero-shade" aria-hidden="true" />
+        <div className="alice-hero-content">
+          <div className="alice-eyebrow"><span className="alice-eyebrow-dot" /> {t('greeting')}{firstName ? `, ${firstName}` : ''}</div>
+          <h1>Find trusted help<br /><span>for your home.</span></h1>
+          <p>Repairs, cleaning, deliveries and more — book reliable local services in Buea with confidence.</p>
+          <form className="alice-hero-search" onSubmit={submitSearch}>
+            <Search className="h-5 w-5 shrink-0 text-royal-indigo" />
+            <input value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder={t('searchPlaceholder')} aria-label={t('searchPlaceholder')} />
+            <button type="submit">Search <ArrowRight className="h-4 w-4" /></button>
+          </form>
+          <div className="alice-hero-meta"><span><MapPin className="h-4 w-4" /> Serving Buea, Cameroon</span><span><CheckCircle2 className="h-4 w-4" /> Verified local professionals</span></div>
         </div>
+        <div className="alice-hero-note"><span className="alice-note-icon"><Sparkles className="h-4 w-4" /></span><span><b>Good help, close by</b><small>Book a service in minutes</small></span></div>
+      </section>
 
-        {/* Prominent Search Input: "What service do you need?" */}
-        <form onSubmit={handleSearchSubmit} className="relative mt-2">
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder={t('searchPlaceholder')}
-            className="w-full pl-10 pr-4 py-3 rounded-2xl bg-cloud-gray/60 border border-cloud-gray text-xs text-midnight-navy placeholder:text-dark-slate/50 font-medium focus:outline-royal-indigo transition-all"
-          />
-          <Search className="w-4 h-4 text-dark-slate/60 absolute left-3.5 top-1/2 -translate-y-1/2" />
-        </form>
+      <section className="alice-category-rail" aria-label="Browse service categories">
+        <button className="alice-category-all" onClick={() => onSelectTab('explore')}><span className="alice-category-icon"><Search /></span><span>All services</span></button>
+        {categories.map((category, index) => {
+          const Icon = serviceIcons[index % serviceIcons.length];
+          return <button key={category.id} onClick={() => categoryClick(category)}><span className="alice-category-icon"><Icon /></span><span>{categoryName(category)}</span></button>;
+        })}
+      </section>
+
+      <div className="alice-content-wrap">
+        {activeBooking && <div className="alice-booking-banner">
+          <div className="alice-booking-icon"><Calendar className="h-5 w-5" /></div>
+          <div className="alice-booking-copy"><span>Your service is underway</span><b>{activeBooking.service_name} <span className="alice-booking-muted">with {activeBooking.provider_name}</span></b></div>
+          <StatusPill status={activeBooking.status} />
+          <button onClick={() => onSelectTab('bookings')}>View booking <ArrowRight className="h-4 w-4" /></button>
+        </div>}
+
+        <section className="alice-section">
+          <div className="alice-section-heading"><div><span className="alice-kicker">MADE FOR EVERYDAY LIVING</span><h2>Services you can count on</h2><p>Skilled local professionals, ready when you need them.</p></div><button className="alice-text-link" onClick={() => onSelectTab('explore')}>Explore all services <ArrowRight className="h-4 w-4" /></button></div>
+          <div className="alice-service-grid">
+            {categories.slice(0, 3).map((category, index) => {
+              const Icon = serviceIcons[index % serviceIcons.length];
+              const descriptions = [category.description, 'A fresh, comfortable home without the hassle.', 'Fast, dependable help from trusted neighbourhood experts.'];
+              return <article className="alice-service-card" key={category.id}>
+                <button className="alice-service-image" onClick={() => categoryClick(category)} aria-label={`Explore ${categoryName(category)}`} style={{ backgroundImage: `url("${serviceImages[index]}")` }}>
+                  <span className="alice-image-label"><Icon className="h-4 w-4" /> Local experts</span>
+                </button>
+                <div className="alice-service-body"><span className="alice-service-overline">{index === 0 ? 'HOME REPAIRS' : index === 1 ? 'CLEAN & CARE' : 'EVERYDAY ESSENTIALS'}</span><h3>{categoryName(category)}</h3><p>{descriptions[index]}</p><button className="alice-service-link" onClick={() => categoryClick(category)}>Explore service <ArrowRight className="h-4 w-4" /></button></div>
+              </article>;
+            })}
+          </div>
+        </section>
+
+        <section className="alice-benefits">
+          <div className="alice-benefit-intro"><span className="alice-kicker">THE ALICE DIFFERENCE</span><h2>Local service.<br />Peace of mind.</h2><p>Find the right help and book with confidence, every time.</p></div>
+          <div className="alice-benefit"><span><ShieldAlert /></span><b>Vetted professionals</b><p>Identity-checked providers you can feel good about inviting in.</p></div>
+          <div className="alice-benefit"><span><Clock /></span><b>Simple, reliable booking</b><p>Make a request and keep track of your service in one place.</p></div>
+          <div className="alice-benefit"><span><Star /></span><b>Support that cares</b><p>Our team is here to help if anything doesn’t go to plan.</p></div>
+        </section>
+
+        <section className="alice-lower-grid">
+          <div className="alice-power-card"><div><span className="alice-kicker">POWER THROUGH THE OUTAGES</span><h2>Reliable power,<br />wherever you need it.</h2><p>Rent a clean 2 kWh power station for your home or office in Buea.</p><button onClick={() => onSelectTab('rentals')}>Explore power rentals <ArrowRight className="h-4 w-4" /></button></div><span className="alice-power-icon"><Zap /></span></div>
+          <div className="alice-providers-card"><div className="alice-section-heading compact"><div><span className="alice-kicker">NEAR YOUR NEIGHBOURHOOD</span><h2>Meet trusted providers</h2></div><button className="alice-text-link" onClick={() => onSelectTab('explore')}>See all <ArrowRight className="h-4 w-4" /></button></div>{providers.length ? providers.slice(0, 2).map((provider) => <div className="alice-provider-row" key={provider.id}><div className="alice-provider-avatar">{provider.display_name?.charAt(0) || 'A'}</div><div><b>{provider.display_name}</b><span><CheckCircle2 className="h-3.5 w-3.5" /> Verified professional</span></div><button onClick={() => onRequestService(provider)} aria-label={`Book ${provider.display_name}`}><ArrowRight className="h-4 w-4" /></button></div>) : <p className="alice-empty-providers">Our local professionals are ready to help.</p>}</div>
+        </section>
+
+        <section className="alice-safety-strip"><span className="alice-safety-icon"><ShieldAlert /></span><div><b>Your safety matters</b><p>Report an incident or reach our support team for help.</p></div><button onClick={onOpenReport}>Trust &amp; safety <ArrowRight className="h-4 w-4" /></button></section>
       </div>
 
-      {/* Active Booking Tracker Card (Section 11.3) */}
-      {activeBooking && (
-        <div className="bg-pure-white rounded-3xl p-4 border-2 border-royal-indigo/30 shadow-card">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-royal-indigo flex items-center gap-1">
-              <Clock className="w-3 h-3 text-royal-indigo" />
-              <span>{t('activeBookingBanner')}</span>
-            </span>
-            <StatusPill status={activeBooking.status} />
-          </div>
-
-          <h3 className="font-extrabold text-midnight-navy text-sm mb-1">
-            {activeBooking.service_name}
-          </h3>
-          <p className="text-xs text-dark-slate/80 mb-3 flex items-center gap-2">
-            <span>By <strong>{activeBooking.provider_name}</strong></span>
-            <span>•</span>
-            <span className="flex items-center gap-1 text-[11px]">
-              <MapPin className="w-3 h-3 text-royal-indigo" />
-              {activeBooking.neighbourhood}
-            </span>
-          </p>
-
-          <div className="flex items-center justify-between pt-2 border-t border-cloud-gray">
-            {activeBooking.checkin_pin ? (
-              <div className="flex items-center gap-1.5 text-xs">
-                <span className="text-dark-slate/60 text-[11px]">Job PIN:</span>
-                <span className="font-mono font-extrabold text-royal-indigo text-sm bg-indigo-50 px-2 py-0.5 rounded-lg border border-royal-indigo/20">
-                  {activeBooking.checkin_pin}
-                </span>
-              </div>
-            ) : (
-              <span className="text-[11px] text-dark-slate/60">
-                {activeBooking.status === 'QUOTATION_RECEIVED' ? 'Quotation awaiting review' : 'Awaiting confirmation'}
-              </span>
-            )}
-
-            <button
-              onClick={() => onSelectTab('bookings')}
-              className="text-xs font-bold text-royal-indigo flex items-center gap-1 hover:underline cursor-pointer"
-            >
-              <span>{t('viewDetails')}</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* Quick Category Grid (Repairs, Cleaning, Water, Gas, Laundry, Deliveries, Power Rental) */}
-      <div>
-        <div className="flex items-center justify-between mb-3 px-1">
-          <h3 className="font-extrabold text-midnight-navy text-base tracking-tight">
-            {t('quickCategories')}
-          </h3>
-          <button
-            onClick={() => onSelectTab('explore')}
-            className="text-xs font-bold text-royal-indigo hover:underline flex items-center gap-0.5 cursor-pointer"
-          >
-            <span>See all</span>
-            <ArrowRight className="w-3 h-3" />
-          </button>
-        </div>
-
-        <div className="grid grid-cols-3 sm:grid-cols-4 gap-2.5">
-          {categories.map((c) => (
-            <ServiceCard
-              key={c.id}
-              category={c}
-              onClick={() => {
-                if (c.slug === 'power-rental') {
-                  onSelectTab('rentals');
-                } else {
-                  onSelectCategory(c.slug);
-                  onSelectTab('explore');
-                }
-              }}
-            />
-          ))}
-        </div>
-      </div>
-
-      {/* Feature Banner: 2kWh Power Station Rentals for Buea Outages */}
-      <div
-        onClick={() => onSelectTab('rentals')}
-        className="bg-alice-header-gradient rounded-3xl p-4 text-pure-white shadow-elevated flex items-center justify-between cursor-pointer active:scale-98 transition-all"
-      >
-        <div className="pr-2">
-          <span className="inline-block px-2 py-0.5 rounded-full bg-pure-white/20 text-[10px] font-bold uppercase tracking-wider mb-1">
-            Load Shedding Solution
-          </span>
-          <h4 className="font-extrabold text-base leading-tight">
-            2 kWh Portable Power Stations
-          </h4>
-          <p className="text-xs text-pure-white/90 mt-1">
-            Clean battery electricity for Buea homes & offices. Instant compatibility calculator.
-          </p>
-        </div>
-        <div className="w-12 h-12 rounded-2xl bg-pure-white/20 flex items-center justify-center shrink-0">
-          <Zap className="w-6 h-6 text-amber-300 fill-amber-300" />
-        </div>
-      </div>
-
-      {/* Nearby Verified Buea Providers (Section 11.3) */}
-      <div>
-        <div className="flex items-center justify-between mb-3 px-1">
-          <h3 className="font-extrabold text-midnight-navy text-base tracking-tight flex items-center gap-1.5">
-            <Sparkles className="w-4 h-4 text-royal-indigo" />
-            <span>{t('nearbyProviders')}</span>
-          </h3>
-          <button
-            onClick={() => onSelectTab('explore')}
-            className="text-xs font-bold text-royal-indigo hover:underline cursor-pointer"
-          >
-            Filter by Area
-          </button>
-        </div>
-
-        <div className="space-y-3">
-          {providers.map((p) => (
-            <ProviderCard
-              key={p.id}
-              provider={p}
-              onBook={() => onRequestService(p)}
-            />
-          ))}
-        </div>
-      </div>
-
-      {/* Visible Safety & Incident Reporting Trigger */}
-      <div className="bg-pure-white rounded-3xl p-4 border border-cloud-gray shadow-card flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center shrink-0">
-            <ShieldAlert className="w-5 h-5" />
-          </div>
-          <div>
-            <h4 className="font-bold text-midnight-navy text-xs">
-              Trust & Safety Assurance
-            </h4>
-            <p className="text-[11px] text-dark-slate/70">
-              Identity checked providers & transparent dispute review.
-            </p>
-          </div>
-        </div>
-        <button
-          onClick={onOpenReport}
-          className="px-3 py-1.5 rounded-xl border border-rose-200 text-rose-600 hover:bg-rose-50 text-xs font-bold transition-all shrink-0 cursor-pointer"
-        >
-          SOS / Report
-        </button>
-      </div>
+      <footer className="alice-footer"><div className="alice-footer-brand"><span className="alice-brand-mark">A</span><div><b>ALICE</b><small>Local help, made simple.</small></div></div><div className="alice-footer-links"><button onClick={() => onSelectTab('explore')}>Explore services</button><button onClick={() => onSelectTab('bookings')}>My bookings</button><button onClick={onOpenReport}>Help &amp; safety</button></div><span>© 2026 Alice · Buea, Cameroon</span></footer>
     </div>
   );
 };
-

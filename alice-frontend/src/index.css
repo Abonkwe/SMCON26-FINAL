@@ -49,3 +49,205 @@
   padding-top: calc(1rem + var(--safe-top));
 }
 
+/* Alice web landing page: keep the established lavender, indigo and navy palette. */
+.alice-header { position: sticky; top: 0; z-index: 40; background: rgba(253,253,254,.96); border-bottom: 1px solid rgba(24,27,42,.08); backdrop-filter: blur(16px); }
+.alice-header-inner { max-width: 1440px; min-height: 78px; margin: 0 auto; padding: 0 5.5%; display: flex; align-items: center; justify-content: space-between; gap: 30px; }
+.alice-brand-mark { width: 40px; height: 40px; flex: 0 0 auto; display: grid; place-items: center; border-radius: 14px; color: #FDFDFE; background: linear-gradient(135deg,#8980EA 0%,#AAADF2 50%,#9A73F5 100%); font-weight: 900; font-size: 23px; letter-spacing: -2px; box-shadow: 0 5px 14px rgba(88,95,183,.22); }
+.alice-brand-name { display: block; color: #181B2A; font-weight: 850; font-size: 18px; letter-spacing: -.04em; line-height: 1.2; }
+.alice-brand-subtitle { display: block; margin-top: 2px; color: #77798B; font-size: 10px; font-weight: 650; letter-spacing: .08em; text-transform: uppercase; }
+.alice-desktop-nav { display: flex; align-items: center; gap: clamp(16px,2.5vw,38px); }
+.alice-desktop-nav button { display: flex; align-items: center; gap: 7px; padding: 10px 0; background: transparent; color: #45475B; font-size: 13px; font-weight: 650; cursor: pointer; transition: color .18s; }
+.alice-desktop-nav button:hover { color: #585FB7; }
+.alice-desktop-nav svg { width: 16px; height: 16px; }
+.alice-header-actions { display: flex; align-items: center; gap: 9px; }
+.alice-header-icon-button { display: inline-flex; align-items: center; justify-content: center; min-width: 38px; height: 38px; padding: 0 10px; border-radius: 13px; color: #585FB7; background: #F0F1F5; cursor: pointer; transition: background .18s, transform .18s; }
+.alice-header-icon-button:hover { background: #e7e7f6; transform: translateY(-1px); }
+.alice-header-icon-button svg { width: 17px; height: 17px; }
+.alice-language-button { gap: 6px; font-size: 11px; font-weight: 800; }
+.alice-sos-button { color: #fff; background: #585FB7; }
+.alice-sos-button:hover { background: #484fa2; }
+.alice-header-avatar { width: 38px; height: 38px; border-radius: 50%; background: #585FB7; color: white; font-weight: 750; cursor: pointer; }
+.alice-signin-button { padding: 11px 17px; border-radius: 13px; color: white; background: #585FB7; font-size: 12px; font-weight: 750; cursor: pointer; transition: background .18s, transform .18s; }
+.alice-signin-button:hover { background: #484fa2; transform: translateY(-1px); }
+.alice-home { color: #181B2A; background: #FDFDFE; min-height: 100vh; }
+.alice-role-control { position: absolute; z-index: 5; right: 5.5%; top: 91px; width: 220px; }
+.alice-role-control > div { margin: 0; opacity: .94; }
+.alice-hero { position: relative; width: 100%; min-height: clamp(490px,48vw,650px); overflow: hidden; display: flex; align-items: center; background: #252b48; }
+.alice-hero-image { position: absolute; inset: 0; background-image: url('https://images.unsplash.com/photo-1621905251918-48416bd8575a?auto=format&fit=crop&w=2200&q=90'); background-size: cover; background-position: center 42%; transform: scale(1.01); }
+.alice-hero-shade { position: absolute; inset: 0; background: linear-gradient(90deg,rgba(24,27,42,.92) 0%,rgba(34,38,67,.82) 37%,rgba(39,43,72,.26) 72%,rgba(39,43,72,.08) 100%); }
+.alice-hero-content { position: relative; z-index: 1; width: min(1440px,100%); margin: 0 auto; padding: 76px 8% 96px; color: #FDFDFE; }
+.alice-eyebrow { display: flex; align-items: center; gap: 9px; margin-bottom: 22px; color: rgba(255,255,255,.88); font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.alice-eyebrow-dot { width: 8px; height: 8px; border-radius: 50%; background: #AAADF2; box-shadow: 0 0 0 5px rgba(170,173,242,.17); }
+.alice-hero h1 { max-width: 700px; margin: 0; color: white; font-size: clamp(46px,6.1vw,78px); line-height: .99; letter-spacing: -.055em; font-weight: 820; }
+.alice-hero h1 span { color: #C4C6FF; }
+.alice-hero-content > p { max-width: 520px; margin: 23px 0 29px; color: rgba(255,255,255,.82); font-size: 16px; line-height: 1.7; }
+.alice-hero-search { width: min(610px,100%); min-height: 64px; padding: 8px 9px 8px 19px; display: flex; align-items: center; gap: 13px; border: 1px solid rgba(255,255,255,.65); border-radius: 17px; background: #FDFDFE; box-shadow: 0 14px 34px rgba(10,12,30,.2); }
+.alice-hero-search input { flex: 1; min-width: 0; outline: none; color: #181B2A; background: transparent; font-size: 14px; }
+.alice-hero-search input::placeholder { color: #85879A; }
+.alice-hero-search button,.alice-power-card button { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 46px; padding: 0 20px; border-radius: 12px; color: white; background: #585FB7; font-size: 13px; font-weight: 750; cursor: pointer; transition: background .18s, transform .18s; }
+.alice-hero-search button:hover,.alice-power-card button:hover { background: #484fa2; transform: translateY(-1px); }
+.alice-hero-meta { display: flex; flex-wrap: wrap; gap: 22px; margin-top: 20px; color: rgba(255,255,255,.86); font-size: 12px; font-weight: 600; }
+.alice-hero-meta span { display: flex; align-items: center; gap: 7px; }
+.alice-hero-meta svg { color: #C4C6FF; }
+.alice-hero-note { position: absolute; right: 8%; bottom: 48px; z-index: 1; display: flex; align-items: center; gap: 11px; padding: 14px 19px; border: 1px solid rgba(255,255,255,.24); border-radius: 16px; color: white; background: rgba(24,27,42,.48); backdrop-filter: blur(12px); }
+.alice-note-icon { width: 36px; height: 36px; display: grid; place-items: center; border-radius: 12px; color: #D9DAFF; background: rgba(170,173,242,.2); }
+.alice-hero-note b,.alice-hero-note small { display: block; }
+.alice-hero-note b { font-size: 12px; }
+.alice-hero-note small { margin-top: 3px; color: rgba(255,255,255,.72); font-size: 10px; }
+.alice-category-rail { position: relative; z-index: 2; width: min(1240px,calc(100% - 10%)); min-height: 94px; margin: -38px auto 0; padding: 12px 22px; display: flex; align-items: center; justify-content: space-between; gap: 8px; border: 1px solid rgba(24,27,42,.05); border-radius: 20px; background: #FDFDFE; box-shadow: 0 12px 36px rgba(24,27,42,.1); overflow-x: auto; }
+.alice-category-rail button { min-width: 112px; padding: 7px 9px; display: flex; align-items: center; gap: 10px; border-radius: 13px; color: #4a4c60; background: transparent; font-size: 11px; font-weight: 650; text-align: left; cursor: pointer; transition: background .18s,color .18s; }
+.alice-category-rail button:hover { color: #585FB7; background: #F0F1F5; }
+.alice-category-icon { width: 38px; height: 38px; flex: 0 0 auto; display: grid; place-items: center; border-radius: 12px; color: #585FB7; background: #F0F1F5; }
+.alice-category-icon svg { width: 18px; height: 18px; }
+.alice-category-all .alice-category-icon { color: white; background: linear-gradient(135deg,#8980EA,#9A73F5); }
+.alice-content-wrap { width: min(1240px,calc(100% - 10%)); margin: 0 auto; }
+.alice-booking-banner { margin-top: 36px; padding: 15px 19px; display: flex; align-items: center; gap: 14px; border: 1px solid rgba(88,95,183,.2); border-radius: 16px; background: #f7f7fc; }
+.alice-booking-icon { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 13px; color: #585FB7; background: #e9eafa; }
+.alice-booking-copy { flex: 1; display: grid; gap: 3px; }
+.alice-booking-copy > span { color: #77798B; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; }
+.alice-booking-copy b { font-size: 13px; }
+.alice-booking-muted { color: #77798B; font-weight: 500; }
+.alice-booking-banner > button,.alice-text-link,.alice-service-link { display: inline-flex; align-items: center; gap: 7px; color: #585FB7; background: transparent; font-size: 12px; font-weight: 750; cursor: pointer; }
+.alice-section { padding: 78px 0 52px; }
+.alice-section-heading { margin-bottom: 27px; display: flex; align-items: end; justify-content: space-between; gap: 18px; }
+.alice-kicker { display: block; margin-bottom: 10px; color: #7377C2; font-size: 10px; font-weight: 800; letter-spacing: .14em; }
+.alice-section-heading h2,.alice-benefit-intro h2,.alice-power-card h2 { margin: 0; color: #181B2A; font-size: clamp(26px,3vw,36px); line-height: 1.13; letter-spacing: -.045em; font-weight: 800; }
+.alice-section-heading p,.alice-benefit-intro p { margin: 9px 0 0; color: #77798B; font-size: 13px; }
+.alice-service-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 23px; }
+.alice-service-card { overflow: hidden; border: 1px solid rgba(24,27,42,.08); border-radius: 18px; background: white; box-shadow: 0 5px 18px rgba(24,27,42,.045); transition: transform .2s,box-shadow .2s; }
+.alice-service-card:hover { transform: translateY(-4px); box-shadow: 0 15px 34px rgba(24,27,42,.12); }
+.alice-service-image { position: relative; width: 100%; height: clamp(180px,20vw,258px); display: block; background-position: center; background-size: cover; cursor: pointer; }
+.alice-service-image:after { position: absolute; inset: 45% 0 0; content: ''; background: linear-gradient(transparent,rgba(24,27,42,.33)); }
+.alice-image-label { position: absolute; z-index: 1; left: 15px; bottom: 14px; display: flex; align-items: center; gap: 7px; color: white; font-size: 11px; font-weight: 700; }
+.alice-service-body { padding: 20px 21px 21px; }
+.alice-service-overline { color: #787BC2; font-size: 9px; letter-spacing: .13em; font-weight: 800; }
+.alice-service-body h3 { margin: 8px 0; color: #181B2A; font-size: 19px; letter-spacing: -.025em; }
+.alice-service-body p { min-height: 42px; margin: 0 0 17px; color: #77798B; font-size: 12px; line-height: 1.65; }
+.alice-service-link { padding: 0; }
+.alice-benefits { padding: 39px; display: grid; grid-template-columns: 1.25fr repeat(3,1fr); align-items: center; gap: 32px; border-radius: 22px; background: #F0F1F5; }
+.alice-benefit-intro h2 { font-size: 29px; }
+.alice-benefit-intro p { max-width: 210px; line-height: 1.55; }
+.alice-benefit > span { width: 42px; height: 42px; margin-bottom: 14px; display: grid; place-items: center; border-radius: 14px; color: #585FB7; background: #e1e2f4; }
+.alice-benefit > span svg { width: 20px; height: 20px; }
+.alice-benefit b { display: block; color: #181B2A; font-size: 13px; }
+.alice-benefit p { margin: 7px 0 0; color: #77798B; font-size: 11px; line-height: 1.65; }
+.alice-lower-grid { padding: 64px 0; display: grid; grid-template-columns: 1.03fr .97fr; gap: 23px; }
+.alice-power-card { min-height: 290px; padding: 34px; display: flex; align-items: center; justify-content: space-between; gap: 20px; overflow: hidden; border-radius: 20px; color: white; background: linear-gradient(135deg,#292f50,#585FB7 70%,#777BD0); }
+.alice-power-card .alice-kicker { color: #d2d3ff; }
+.alice-power-card h2 { color: white; font-size: 30px; }
+.alice-power-card p { max-width: 350px; margin: 12px 0 20px; color: rgba(255,255,255,.78); font-size: 12px; line-height: 1.65; }
+.alice-power-card button { min-height: 42px; color: #292f50; background: white; font-size: 11px; }
+.alice-power-card button:hover { color: white; background: #343752; }
+.alice-power-icon { width: 110px; height: 110px; flex: 0 0 auto; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.24); border-radius: 34px; color: #e3e3ff; background: rgba(255,255,255,.12); transform: rotate(8deg); }
+.alice-power-icon svg { width: 50px; height: 50px; }
+.alice-providers-card { padding: 27px; border: 1px solid rgba(24,27,42,.08); border-radius: 20px; background: white; }
+.alice-section-heading.compact { margin-bottom: 12px; align-items: center; }
+.alice-section-heading.compact .alice-kicker { margin-bottom: 7px; }
+.alice-section-heading.compact h2 { font-size: 22px; }
+.alice-section-heading.compact .alice-text-link { white-space: nowrap; }
+.alice-provider-row { padding: 14px 0; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #f0f1f5; }
+.alice-provider-row:last-of-type { border-bottom: 0; }
+.alice-provider-avatar { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 50%; color: #585FB7; background: #e9eafa; font-weight: 800; }
+.alice-provider-row > div:nth-child(2) { flex: 1; }
+.alice-provider-row b,.alice-provider-row span { display: flex; align-items: center; gap: 5px; }
+.alice-provider-row b { font-size: 12px; }
+.alice-provider-row span { margin-top: 5px; color: #77798B; font-size: 10px; }
+.alice-provider-row span svg { color: #585FB7; }
+.alice-provider-row > button { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 11px; color: #585FB7; background: #f0f1f5; cursor: pointer; }
+.alice-empty-providers { padding: 12px 0; color: #77798B; font-size: 12px; }
+.alice-safety-strip { margin-bottom: 55px; padding: 20px 22px; display: flex; align-items: center; gap: 14px; border: 1px solid rgba(88,95,183,.15); border-radius: 17px; background: #f7f7fc; }
+.alice-safety-icon { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 14px; color: #585FB7; background: #e9eafa; }
+.alice-safety-strip > div { flex: 1; }
+.alice-safety-strip b { display: block; font-size: 12px; }
+.alice-safety-strip p { margin: 4px 0 0; color: #77798B; font-size: 11px; }
+.alice-safety-strip > button { display: flex; align-items: center; gap: 6px; color: #585FB7; background: transparent; font-size: 11px; font-weight: 750; cursor: pointer; }
+.alice-footer { min-height: 132px; padding: 28px max(5%,calc((100% - 1240px)/2)); display: flex; align-items: center; justify-content: space-between; gap: 24px; border-top: 1px solid rgba(24,27,42,.08); background: #F0F1F5; }
+.alice-footer-brand { display: flex; align-items: center; gap: 10px; }
+.alice-footer-brand .alice-brand-mark { width: 36px; height: 36px; font-size: 20px; }
+.alice-footer-brand b,.alice-footer-brand small { display: block; }
+.alice-footer-brand b { font-size: 13px; }
+.alice-footer-brand small { margin-top: 3px; color: #77798B; font-size: 10px; }
+.alice-footer-links { display: flex; gap: 22px; }
+.alice-footer-links button { color: #55576a; background: transparent; font-size: 11px; cursor: pointer; }
+.alice-footer-links button:hover { color: #585FB7; }
+.alice-footer > span { color: #85879A; font-size: 10px; }
+
+@media (max-width: 900px) {
+  .alice-header-inner { min-height: 70px; padding: 0 4%; gap: 14px; }
+  .alice-desktop-nav { gap: 14px; }
+  .alice-desktop-nav button { font-size: 11px; }
+  .alice-desktop-nav button svg { display: none; }
+  .alice-category-rail,.alice-content-wrap { width: calc(100% - 8%); }
+  .alice-benefits { padding: 28px; grid-template-columns: repeat(2,1fr); }
+  .alice-lower-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .alice-header-inner { min-height: 64px; padding: 0 16px; }
+  .alice-brand-mark { width: 36px; height: 36px; border-radius: 12px; font-size: 20px; }
+  .alice-brand-name { font-size: 16px; }
+  .alice-brand-subtitle { font-size: 8px; }
+  .alice-desktop-nav { display: none; }
+  .alice-header-actions { gap: 6px; }
+  .alice-header-icon-button { min-width: 34px; width: 34px; height: 34px; padding: 0; border-radius: 11px; }
+  .alice-language-button span { display: none; }
+  .alice-signin-button { padding: 9px 12px; font-size: 11px; }
+  .alice-role-control { top: 75px; right: 14px; width: 185px; }
+  .alice-hero { min-height: 540px; align-items: end; }
+  .alice-hero-image { background-position: 58% center; }
+  .alice-hero-shade { background: linear-gradient(0deg,rgba(24,27,42,.95) 0%,rgba(34,38,67,.78) 48%,rgba(39,43,72,.12) 100%); }
+  .alice-hero-content { padding: 115px 22px 76px; }
+  .alice-eyebrow { margin-bottom: 15px; font-size: 10px; }
+  .alice-hero h1 { font-size: clamp(43px,12vw,58px); }
+  .alice-hero-content > p { margin: 17px 0 22px; font-size: 13px; }
+  .alice-hero-search { min-height: 56px; gap: 9px; padding: 6px 6px 6px 13px; border-radius: 14px; }
+  .alice-hero-search input { font-size: 12px; }
+  .alice-hero-search button { min-height: 42px; padding: 0 12px; font-size: 11px; }
+  .alice-hero-meta { gap: 11px; font-size: 10px; }
+  .alice-hero-note { display: none; }
+  .alice-category-rail { width: calc(100% - 28px); min-height: 78px; margin-top: -29px; padding: 8px 10px; justify-content: flex-start; border-radius: 16px; }
+  .alice-category-rail button { min-width: 125px; font-size: 10px; }
+  .alice-category-icon { width: 34px; height: 34px; }
+  .alice-content-wrap { width: calc(100% - 36px); }
+  .alice-booking-banner { margin-top: 23px; gap: 9px; padding: 12px; flex-wrap: wrap; }
+  .alice-booking-icon { width: 34px; height: 34px; }
+  .alice-booking-copy b { font-size: 11px; }
+  .alice-booking-banner > button { width: 100%; justify-content: flex-end; }
+  .alice-section { padding: 53px 0 36px; }
+  .alice-section-heading { align-items: flex-start; }
+  .alice-section-heading > .alice-text-link { margin-top: 18px; white-space: nowrap; font-size: 10px; }
+  .alice-section-heading h2 { font-size: 25px; }
+  .alice-section-heading p { font-size: 11px; }
+  .alice-service-grid { grid-template-columns: 1fr; gap: 15px; }
+  .alice-service-card { display: grid; grid-template-columns: 38% 1fr; min-height: 160px; }
+  .alice-service-image { height: 100%; min-height: 160px; }
+  .alice-image-label { font-size: 0; left: 10px; bottom: 10px; }
+  .alice-image-label svg { width: 16px; height: 16px; }
+  .alice-service-body { padding: 17px 14px; }
+  .alice-service-body h3 { font-size: 15px; }
+  .alice-service-body p { min-height: 0; margin-bottom: 12px; font-size: 10px; }
+  .alice-service-link { font-size: 10px; }
+  .alice-benefits { padding: 23px 20px; gap: 22px 16px; border-radius: 17px; }
+  .alice-benefit-intro { grid-column: 1/-1; }
+  .alice-benefit-intro h2 { font-size: 25px; }
+  .alice-benefit-intro p { max-width: none; font-size: 11px; }
+  .alice-benefit > span { width: 36px; height: 36px; margin-bottom: 9px; }
+  .alice-benefit b { font-size: 11px; }
+  .alice-benefit p { font-size: 10px; }
+  .alice-lower-grid { padding: 38px 0; gap: 15px; }
+  .alice-power-card { min-height: 260px; padding: 24px 20px; }
+  .alice-power-card h2 { font-size: 26px; }
+  .alice-power-card p { max-width: 255px; font-size: 11px; }
+  .alice-power-icon { width: 60px; height: 60px; border-radius: 20px; }
+  .alice-power-icon svg { width: 30px; height: 30px; }
+  .alice-providers-card { padding: 20px 17px; }
+  .alice-section-heading.compact { display: block; }
+  .alice-section-heading.compact > .alice-text-link { margin-top: 11px; }
+  .alice-safety-strip { margin-bottom: 35px; padding: 15px; gap: 10px; }
+  .alice-safety-strip p { font-size: 10px; }
+  .alice-safety-strip > button { max-width: 92px; font-size: 10px; }
+  .alice-footer { padding: 23px 18px calc(92px + var(--safe-bottom)); flex-wrap: wrap; gap: 16px; }
+  .alice-footer-links { width: 100%; justify-content: space-between; gap: 9px; order: 3; }
+  .alice-footer-links button { font-size: 10px; }
+  .alice-footer > span { font-size: 9px; }
+}
+
