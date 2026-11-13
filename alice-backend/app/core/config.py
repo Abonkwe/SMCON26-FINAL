@@ -53,7 +53,7 @@ class Settings(BaseSettings):
 
     # Google Gemini AI Provider
     GEMINI_API_KEY: str = "mock_gemini_api_key"
-    GEMINI_MODEL: str = "gemini-2.5-flash"
+    GEMINI_MODEL: str = "gemini-3.8-flash"
 
 
 @lru_cache()
