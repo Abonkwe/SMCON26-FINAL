@@ -1,0 +1,39 @@
+[project]
+name = "alice-backend"
+version = "0.1.0"
+description = "ALICE Backend Modular Monolith"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.162.5",
+    "google-genai>=3.3.0",
+    "httpx>=0.28.1",
+    "phonenumbers>=9.0.43",
+    "pydantic-settings>=2.16.2",
+    "python-multipart>=0.0.33",
+    "supabase>=2.34.1",
+    "twilio>=9.13.0",
+    "uvicorn[standard]>=0.54.0",
+]
+
+[dependency-groups]
+dev = [
+    "mypy>=2.4.1",
+    "pytest>=9.2.0",
+    "pytest-asyncio>=1.5.0",
+    "ruff>=0.17.5",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W"]
+ignore = ["E501"]
